@@ -57,6 +57,18 @@ class ReportGenerator:
 
         # Helper function to write dictionary data to PDF
         def write_dict_to_pdf(pdf_obj, dictionary, indent=""):
+            # Pre-calculate column width dynamically based on the longest key at this level
+            pdf_obj.set_font("helvetica", "B", 10)
+            max_key_width = 0
+            for key, value in dictionary.items():
+                if not isinstance(value, (dict, list)):
+                    clean_key = str(key).encode('latin-1', 'replace').decode('latin-1')
+                    key_str = f"{indent}{clean_key}:"
+                    width = pdf_obj.get_string_width(key_str)
+                    if width > max_key_width:
+                        max_key_width = width
+            col_width = max(60, max_key_width + 3)  # Use 60mm minimum, or dynamic width + 3mm padding
+
             for key, value in dictionary.items():
                 if isinstance(value, dict):
                     pdf_obj.set_font("helvetica", "B", 10)
@@ -78,9 +90,10 @@ class ReportGenerator:
                     if "[CRITICAL]" in clean_val or "[WARNING]" in clean_val or "Hits:" in clean_key and value != 0:
                         pdf_obj.set_text_color(200, 0, 0)
                         
-                    pdf_obj.cell(60, 6, f"{indent}{clean_key}:", ln=False)
+                    pdf_obj.cell(col_width, 6, f"{indent}{clean_key}:", ln=False)
                     pdf_obj.set_font("helvetica", "", 10)
                     pdf_obj.multi_cell(0, 6, f"{clean_val}")
+                    pdf_obj.x = pdf_obj.l_margin # Reset X to left margin for the next row (FPDF2 compatibility)
                     pdf_obj.set_text_color(0, 0, 0) # Reset to black
 
         # Section 1: Analysis Summary (Metadata)
@@ -116,6 +129,7 @@ class ReportGenerator:
                 if item.get('Is_Flagged'):
                     pdf.set_text_color(200, 0, 0)
                 pdf.multi_cell(0, 5, line.encode('latin-1', 'replace').decode('latin-1'))
+                pdf.x = pdf.l_margin
                 pdf.set_text_color(0, 0, 0)
             pdf.ln(5)
 
