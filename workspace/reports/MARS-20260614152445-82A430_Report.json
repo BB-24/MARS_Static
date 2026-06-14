@@ -1,0 +1,93 @@
+{
+    "Analysis_Summary": {
+        "Analysis ID": "MARS-20260614152445-82A430",
+        "Original File Name": "CursorUserSetup-x64-3.7.36.exe",
+        "File Size (Bytes)": 186590920,
+        "Extension": ".exe",
+        "Creation Timestamp": "2026-06-14 11:05:48",
+        "Magic Bytes (Hex)": "4D5A5000",
+        "MIME/Format Guess": "application/x-msdownload (PE Executable)",
+        "MD5": "936e4c5fd75d09dffc52bc2037a82eb7",
+        "SHA1": "5e2dd74356a5a828ccdf3e2aa8dd269184f8fa98",
+        "SHA256": "da8fd2a304cd6a56bcaf36c6b053c10419863a09a70a98198f3e94b898a4d89e",
+        "SHA512": "12aa15a3aed0e588c4064877f7d60f4c10a967ac7217a0b8f73fbbf18b8d6a2e22d6867ead26663bf610ce9539ebd3d0df605d9c929abe366e3b779e729fe67a"
+    },
+    "Package_Extraction": [],
+    "Static_Analysis_Results": {
+        "CursorUserSetup-x64-3.7.36.exe": {
+            "PE Headers": {
+                "Machine Architecture": "0x14c",
+                "Compile Timestamp": "2025-02-12 11:23:16",
+                "DOS Header Offset (e_lfanew)": "0x100",
+                "Address of Entry Point": "0xa7f98",
+                "Image Base": "0x400000",
+                "Number of Sections": 11
+            },
+            "Mitigations": {
+                "DEP / NX Bit": "Enabled",
+                "ASLR": "Enabled",
+                "CFG (Control Flow Guard)": "Disabled",
+                "RFG (Return Flow Guard)": "Disabled",
+                "SafeSEH": "Disabled",
+                "Stack Canaries (/GS)": "Disabled",
+                "Hardware Protection (CET/Shadow Stack)": "Disabled",
+                "Force Integrity": "Disabled",
+                "Isolation / AppContainer": "Disabled"
+            },
+            "Sections": {
+                "Section: .text": "Perms: R-E | Entropy: 6.38 ",
+                "Section: .itext": "Perms: R-E | Entropy: 6.17 ",
+                "Section: .data": "Perms: RW- | Entropy: 4.97 ",
+                "Section: .bss": "Perms: RW- | Entropy: 0.00 ",
+                "Section: .idata": "Perms: RW- | Entropy: 5.02 ",
+                "Section: .didata": "Perms: RW- | Entropy: 2.73 ",
+                "Section: .edata": "Perms: R-- | Entropy: 1.31 ",
+                "Section: .tls": "Perms: RW- | Entropy: 0.00 ",
+                "Section: .rdata": "Perms: R-- | Entropy: 1.39 ",
+                "Section: .reloc": "Perms: R-- | Entropy: 6.71 ",
+                "Section: .rsrc": "Perms: R-- | Entropy: 6.16 "
+            },
+            "Suspicious Imports": {
+                "Tracked APIs Found": 1,
+                "APIs": "CreateProcessW"
+            },
+            "Manifest Data": {
+                "Manifest Status": "Parsed Successfully",
+                "Requested Execution Level": "asInvoker"
+            },
+            "Strings Analytics": {
+                "IPv4": 2,
+                "IPv6": 0,
+                "URL": 3,
+                "Registry": 1,
+                "Email": 3,
+                "Password-Like": 0
+            },
+            "Extracted Artifacts": {
+                "IPv4": [
+                    "1.0.0.0",
+                    "6.4.0.1"
+                ],
+                "IPv6": [],
+                "URL": [
+                    "http://oneocsp.microsoft.com",
+                    "http://schemas.microsoft.com",
+                    "http://www.microsoft.com"
+                ],
+                "Registry": [
+                    "hKU\\_6"
+                ],
+                "Email": [
+                    "5@w.IC",
+                    "9@S2.WJ",
+                    "S_@d.imy"
+                ],
+                "Password-Like": []
+            },
+            "YARA Signatures": {
+                "Hits": 3,
+                "Matched Rules": "Tactical_Anti_Analysis, Evasion_API_Hashing_Constants, Dropper_Embedded_Executable"
+            }
+        }
+    }
+}
